@@ -1,0 +1,261 @@
+/*グローバルリセットについて。
+marginは、テキストに関係するプロパティではないた=親から子に継承するプロパティではない=bodyは使えない。
+すべての要素に適用させたい時は(*)を使う。グローバルリセットを行うことは一般的で、新しいCSSを作るときは、まず最初にこれを行う。*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /*ボックスサイズの変更は継承されるプロパティではないためbodyには使えず、[*]で全ての要素に適用させる。*/
+}
+
+body {
+  font-family: sans-serif;
+  color: #444;
+  border-top: 10px solid #1098ad;
+  position: relative;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/*要素と要素の間に余白を作るときはmarginを使う。この時、mar-gin-top,margin-bottomどちらか一方を選択することが良い。
+あまり、混在させない方がよい。縦方向の余白を作るときに、おすすめはmargin-bottomで統一すること。*/
+.main-header {
+  background-color: #f7f7f7;
+  padding: 20px 40px;
+  margin-bottom: 60px;
+  height: 80px;
+}
+nav {
+  font-size: 18px;
+}
+
+article {
+  margin-bottom: 60px;
+}
+
+.post-header {
+  margin-bottom: 40px;
+}
+
+aside {
+  background-color: #f7f7f7;
+  border-top: 5px solid #1098ad;
+  border-bottom: 5px solid #1098ad;
+  padding: 50px 40px;
+}
+
+h1,
+h2,
+h3 {
+  color: #1098ad;
+}
+h1 {
+  font-size: 26px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+h2 {
+  font-size: 40px;
+  margin-bottom: 30px;
+  position: relative;
+}
+/*contentは、文字を入れる必要が無くても必須で記載*/
+h2::after {
+  content: "TOP";
+  background-color: yellow;
+  color: #444;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 5px 10px;
+  position: absolute;
+  top: -30px;
+  right: -60px;
+}
+
+h3 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+h4 {
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 22px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+ul,
+ol {
+  margin-left: 50px;
+}
+
+li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/*リストの一番最後の項目だけは下部の余白を消したいときに(last-child)を用いる。尚、値が(0)の時は単位を使わない。*/
+li:last-child {
+  margin-bottom: 0;
+}
+
+/* footer p {
+  font-size: 16px;
+} */
+
+#author {
+  font-style: italic;
+}
+
+#Copyright {
+  font-size: 16px;
+}
+
+.related-author {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.related {
+  list-style: none;
+}
+
+li:first-child {
+  font-weight: bold;
+}
+
+li :last-child {
+  font-style: italic;
+}
+
+/* li: nth-child(
+  even
+); /*疑似セレクタ。nの中にfirst,secoundなど数字を代入して使える。
+また、偶数（even)奇数(odd)など交互にデザインを変えたいときに使われる*/
+
+/*(例)article p:first-childを宣言しても指示は通らない。なぜなら、今回のHTMLでは、articleの第一子孫はheaderとなる*/
+
+/*linkの装飾*/
+/*☆重要！(L)linkリンク→（V）visit訪問済→(h)hoverマウスを合わせた時の装飾→(a)activeクリックした時の装飾。
+CSSは、上から常にこの順で記載する必要がある*/
+
+a :link {
+  color: #1098ad;
+  text-decoration: none;
+}
+a:visited {
+  color: #1098ad;
+}
+a:hover {
+  color: orangered;
+  font-weight: bold;
+  text-decoration: underline orangered;
+}
+
+.add-cart {
+  background-color: black;
+  font-style: italic;
+}
+
+article p:last-child {
+  color: red;
+}
+
+.post-img {
+  width: 100%;
+  height: auto;
+}
+/*heightを使用してautoが使用できるのは、HTMLでその高さが指定されている場合のみ。*/
+/*width:100%とは、親コンテンツの全幅に対する比率。この場合、親コンテンツはヘッダーで、ヘッダーは基本的にページの全幅となる。
+画面の幅に合わせて調整することが必要。*/
+
+nav a:link {
+  display: inline-block;
+  margin-right: 30px;
+  margin-top: 10px;
+}
+
+nav a:link:last-child {
+  margin-right: 0;
+}
+/*絶対的位置決め[absolute]を行えば基本的に、どのような要素でもページ上の好きな位置に置くことが出来る。
+絶対位置決めを行うには親要素に相対位置[position: relative;]を指定すること。
+今回は、bodyに相対位置を指定したが、絶対位置を配置したい場所によって親要素は変わる。*/
+button {
+  font-size: 22px;
+  padding: 20px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+
+/*擬似要素は[::]、擬似クラスは[:]で表現する*/
+h1::first-letter {
+  font-style: normal;
+  margin-right: 5px;
+}
+
+/*afterは、選択された要素の最初の子要素を自動的に作成する befor*/
+
+/*隣接兄弟セレクタ[+]で表現する。隣接兄弟セレクタとは、同じ親要素の子要素で、特定の要素のすぐ次にあるものを指す。
+この、場合h3の次の段落が隣接兄弟セレクタにあたる。その上で、[::first-line]が指定されているため、最初の行だけ赤色に変わる
+h3 + p::first-line {
+  color: red;
+}*/
+
+.author-img {
+  float: left;
+  margin-bottom: 20px;
+}
+
+.author {
+  float: left;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+/*floatは現在ではほとんど使われない。*/
+h1 {
+  float: left;
+}
+
+nav {
+  float: right;
+}
+/*floatで高さが崩れた時の解消方法として、ヘッダーにクラスを作り、floatで指定した上下左右それぞれをclearする。*/
+.clear {
+  clear: both;
+}
+/*ヘッダーに幾つも空のdivを作成することは良くないとして作られたclearfix。
+擬似要素のafterがあるためcontentが必要。また、floatはインライン要素でブロックに変更する必要がある。*/
+.clearfix::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+article {
+  width: 825px;
+  float: left;
+}
+
+aside {
+  width: 300px;
+  float: right;
+}
+
+footer {
+  clear: both;
+}
